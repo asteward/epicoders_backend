@@ -1,9 +1,14 @@
 class StudentsController < ApplicationController
-  before_action :authenticate_user!, :except => :create
+  before_action :authenticate_user!, except: [:index, :new, :create]
 
   respond_to :html, :json
+
   def index
     @students = Student.order(:name)
+    respond_with @students
+  end
+
+  def new
     @student = Student.new
   end
 
